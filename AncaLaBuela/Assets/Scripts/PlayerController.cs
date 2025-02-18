@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,11 +17,27 @@ public class PlayerController : MonoBehaviour
     public Transform orientation;
     Vector3 moveDirection;
 
+    // Ventana
+    [Header("Ventana")]
+    [SerializeField] TMP_Text ventanaTexto1;
+    [SerializeField] TMP_Text ventanaTexto2;
+    [SerializeField] TMP_Text ventanaTexto3;
+    [SerializeField] GameObject ventanaCanvas1;
+    [SerializeField] GameObject ventanaCanvas2;
+    [SerializeField] GameObject ventanaCanvas3;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+
+        ventanaTexto1.text = "Pulsa E para mirar afuera";
+        ventanaTexto2.text = "Pulsa E para mirar afuera";
+        ventanaTexto3.text = "Pulsa E para mirar afuera";
+        ventanaCanvas1.SetActive(false);
+        ventanaCanvas2.SetActive(false);
+        ventanaCanvas3.SetActive(false);
     }
 
     // Update is called once per frame
@@ -71,6 +88,38 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "VentanaControl")
+        {
+            ventanaCanvas1.SetActive(true);
+        }
+        if (other.gameObject.tag == "VentanaControl2")
+        {
+            ventanaCanvas2.SetActive(true);
+        }
+        if (other.gameObject.tag == "VentanaControl3")
+        {
+            ventanaCanvas3.SetActive(true);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "VentanaControl")
+        {
+            ventanaCanvas1.SetActive(false);
+        }
+        if (other.gameObject.tag == "VentanaControl2")
+        {
+            ventanaCanvas2.SetActive(false);
+        }
+        if (other.gameObject.tag == "VentanaControl3")
+        {
+            ventanaCanvas3.SetActive(false);
         }
     }
 }
