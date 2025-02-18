@@ -18,26 +18,22 @@ public class PlayerController : MonoBehaviour
     Vector3 moveDirection;
 
     // Ventana
-    [Header("Ventana")]
-    [SerializeField] TMP_Text ventanaTexto1;
-    [SerializeField] TMP_Text ventanaTexto2;
-    [SerializeField] TMP_Text ventanaTexto3;
+    [Header("Ventana")]    
     [SerializeField] GameObject ventanaCanvas1;
     [SerializeField] GameObject ventanaCanvas2;
     [SerializeField] GameObject ventanaCanvas3;
+    [SerializeField] GameObject ammoCanvas;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-
-        ventanaTexto1.text = "Pulsa E para mirar afuera";
-        ventanaTexto2.text = "Pulsa E para mirar afuera";
-        ventanaTexto3.text = "Pulsa E para mirar afuera";
+        
         ventanaCanvas1.SetActive(false);
         ventanaCanvas2.SetActive(false);
         ventanaCanvas3.SetActive(false);
+        ammoCanvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -105,6 +101,10 @@ public class PlayerController : MonoBehaviour
         {
             ventanaCanvas3.SetActive(true);
         }
+        if (other.gameObject.tag == "Ammo")
+        {
+            ammoCanvas.SetActive(true);
+        }
     }
 
     void OnTriggerExit(Collider other)
@@ -120,6 +120,10 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "VentanaControl3")
         {
             ventanaCanvas3.SetActive(false);
+        }
+        if (other.gameObject.tag == "Ammo")
+        {
+            ammoCanvas.SetActive(false);
         }
     }
 }
