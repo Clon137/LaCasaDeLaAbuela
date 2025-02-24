@@ -8,6 +8,7 @@ TagManager:
   - VentanaControl2
   - VentanaControl3
   - Ammo
+  - Enemy1
   layers:
   - Default
   - TransparentFX
