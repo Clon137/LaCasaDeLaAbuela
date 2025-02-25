@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour
     bool canShot = true;
 
     [SerializeField] int ammo = 5;
+    string[] arma;
+    int armaNum = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -75,6 +77,10 @@ public class PlayerController : MonoBehaviour
         weapon1.SetActive(false);
         weapon2.SetActive(false);
         weapon3.SetActive(false);
+        arma[0] = "pistola";
+        arma[1] = "escopeta";
+        arma[2] = "fusil";
+        armaNum = 0;
     }
 
     // Update is called once per frame

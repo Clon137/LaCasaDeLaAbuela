@@ -21,8 +21,15 @@ class ProjectileControl : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy1")
         {
-            Destroy(other.gameObject);
-            Destroy(gameObject); // Destruir el proyectil al impactar
+            EnemyPersonalControl enemyVar = other.gameObject.GetComponent<EnemyPersonalControl>();
+            enemyVar.Damage();
+            Destroy(gameObject);
+        }
+        if (other.gameObject.tag == "Enemy2")
+        {
+            SlimeControl slimeVar = other.gameObject.GetComponent<SlimeControl>();
+            slimeVar.Damage();
+            Destroy(gameObject);
         }
     }
 

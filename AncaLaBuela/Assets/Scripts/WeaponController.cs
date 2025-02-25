@@ -5,7 +5,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] Transform mira;
     [SerializeField] float rotationSpeed = 10f;
     [SerializeField] Camera wichCamera;
-    public float distanceFromCamera = 50f;
+    public float distanceFromCamera = 5f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

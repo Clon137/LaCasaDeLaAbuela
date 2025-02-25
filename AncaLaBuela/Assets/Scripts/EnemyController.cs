@@ -4,21 +4,34 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] float cooldown = 10f;
-    [SerializeField] GameObject tronquito;
-    [SerializeField] GameObject helado;
-    [SerializeField] GameObject calabaza;
+    public float cooldownMax = 15f;
+    
+    [SerializeField] GameObject[] enemies;
     int randomNum;
+    public int maxRandom = 3;
     int randomPlace;
     [SerializeField] Transform ventana1;
     [SerializeField] Transform ventana2;
     [SerializeField] Transform ventana3;
+    [SerializeField] GameObject Light1;
+    [SerializeField] GameObject Light2;
+    [SerializeField] GameObject Light3;
+    Light luz1;
+    Light luz2;
+    Light luz3;
 
     [SerializeField] Transform[] aparitionPoint;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        Light1.SetActive(false);
+        Light2.SetActive(false);
+        Light3.SetActive(false);
+        luz1 = Light1.GetComponent<Light>();
+        luz2 = Light2.GetComponent<Light>();
+        luz3 = Light3.GetComponent<Light>();
+        turnLight();
     }
 
     // Update is called once per frame
@@ -27,38 +40,61 @@ public class EnemyController : MonoBehaviour
         cooldown -= Time.deltaTime;
         if (cooldown <= 0)
         {
-            randomNum = Random.Range(1,4);
-            randomPlace = Random.Range(0,15);
+            randomNum = Random.Range(0, maxRandom);
+            randomPlace = Random.Range(0, 15);
             GenerateEnemy();
-            cooldown = 10;
-        }
+            cooldown = cooldownMax;
+        }                
     }
 
     void GenerateEnemy()
     {
-        if (randomNum == 1)
+        GameObject enemy = Instantiate(enemies[randomNum], aparitionPoint[randomPlace].position, Quaternion.identity);
+        NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
+        if (randomPlace <= 4)
         {
-            GameObject tronco = Instantiate(tronquito, aparitionPoint[randomPlace].position, Quaternion.identity);
-            NavMeshAgent agent = tronco.GetComponent<NavMeshAgent>();
-            if (randomPlace <= 4) {agent.destination = ventana1.position;}
-            else if (randomPlace <= 9) {agent.destination = ventana2.position;}
-            else {agent.destination = ventana3.position;}
+            agent.destination = ventana1.position;
+            Light1.SetActive(true);
+            Invoke("OffLight1", 5);
         }
-        else if (randomNum == 2)
+        else if (randomPlace <= 9)
         {
-            GameObject heladito = Instantiate(helado, aparitionPoint[randomPlace].position, Quaternion.identity);
-            NavMeshAgent agent = heladito.GetComponent<NavMeshAgent>();
-            if (randomPlace <= 4) {agent.destination = ventana1.position;}
-            else if (randomPlace <= 9) {agent.destination = ventana2.position;}
-            else {agent.destination = ventana3.position;}
+            agent.destination = ventana2.position;
+            Light2.SetActive(true);
+            Invoke("OffLight2", 5);
         }
-        else if (randomNum == 3)
+        else
         {
-            GameObject calabacita = Instantiate(calabaza, aparitionPoint[randomPlace].position, Quaternion.identity);
-            NavMeshAgent agent = calabacita.GetComponent<NavMeshAgent>();
-            if (randomPlace <= 4) {agent.destination = ventana1.position;}
-            else if (randomPlace <= 9) {agent.destination = ventana2.position;}
-            else {agent.destination = ventana3.position;}
+            agent.destination = ventana3.position;
+            Light3.SetActive(true);
+            Invoke("OffLight3", 5);
         }
+    }
+
+    void OffLight1()
+    {
+        Light1.SetActive(false);
+    }
+    void OffLight2()
+    {
+        Light2.SetActive(false);
+    }
+    void OffLight3()
+    {
+        Light3.SetActive(false);
+    }
+    void turnLight()
+    {
+        luz1.intensity = 2;
+        luz2.intensity = 2;
+        luz3.intensity = 2;
+        Invoke("turnOffLight", 0.5f);
+    }
+    void turnOffLight()
+    {
+        luz1.intensity = 0;
+        luz2.intensity = 0;
+        luz3.intensity = 0;
+        Invoke("turnLight", 0.5f);
     }
 }
