@@ -3,12 +3,13 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
+    public OleadaController OC;
     [SerializeField] float cooldown = 10f;
-    public float cooldownMax = 15f;
+    public float cooldownMax = 15f;    
     
     [SerializeField] GameObject[] enemies;
     int randomNum;
-    public int maxRandom = 4;
+    public int maxRandom = 3;
     int randomPlace;
     [SerializeField] Transform ventana1;
     [SerializeField] Transform ventana2;
@@ -31,12 +32,13 @@ public class EnemyController : MonoBehaviour
         luz1 = Light1.GetComponent<Light>();
         luz2 = Light2.GetComponent<Light>();
         luz3 = Light3.GetComponent<Light>();
-        turnLight();
+        turnLight();        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (OC.oleadaGoing)
         cooldown -= Time.deltaTime;
         if (cooldown <= 0)
         {
@@ -53,7 +55,7 @@ public class EnemyController : MonoBehaviour
         NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
         if (randomPlace <= 4)
         {
-            agent.destination = ventana1.position;
+            agent.destination = ventana1.position;            
             Light1.SetActive(true);
             Invoke("OffLight1", 5);
         }

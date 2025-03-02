@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject vidaOFF3;
     [SerializeField] GameObject vidaOFF4;
     [SerializeField] GameObject vidaOFF5;
+    int vidas = 5;
     [SerializeField] GameObject MunicionON1;
     [SerializeField] GameObject MunicionON2;
     [SerializeField] GameObject MunicionON3;
@@ -423,6 +424,98 @@ public class PlayerController : MonoBehaviour
             MunicionOFF3.SetActive(true);
             MunicionOFF4.SetActive(true);
             MunicionOFF5.SetActive(true);
+        }
+    }
+
+    public void Damage()
+    {
+        vidas --;
+        Vida();
+        if (vidas < 0)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+    }
+
+    void Vida()
+    {
+        if (vidas == 5)
+        {
+            vidaON1.SetActive(true);
+            vidaON2.SetActive(true);
+            vidaON3.SetActive(true);
+            vidaON4.SetActive(true);
+            vidaON5.SetActive(true);
+            vidaOFF1.SetActive(false);
+            vidaOFF2.SetActive(false);
+            vidaOFF3.SetActive(false);
+            vidaOFF4.SetActive(false);
+            vidaOFF5.SetActive(false);
+        }
+        else if (vidas == 4)
+        {
+            vidaON1.SetActive(true);
+            vidaON2.SetActive(true);
+            vidaON3.SetActive(true);
+            vidaON4.SetActive(true);
+            vidaON5.SetActive(false);
+            vidaOFF1.SetActive(false);
+            vidaOFF2.SetActive(false);
+            vidaOFF3.SetActive(false);
+            vidaOFF4.SetActive(false);
+            vidaOFF5.SetActive(true);
+        }
+        else if (vidas == 3)
+        {
+            vidaON1.SetActive(true);
+            vidaON2.SetActive(true);
+            vidaON3.SetActive(true);
+            vidaON4.SetActive(false);
+            vidaON5.SetActive(false);
+            vidaOFF1.SetActive(false);
+            vidaOFF2.SetActive(false);
+            vidaOFF3.SetActive(false);
+            vidaOFF4.SetActive(true);
+            vidaOFF5.SetActive(true);
+        }
+        else if (vidas == 2)
+        {
+            vidaON1.SetActive(true);
+            vidaON2.SetActive(true);
+            vidaON3.SetActive(false);
+            vidaON4.SetActive(false);
+            vidaON5.SetActive(false);
+            vidaOFF1.SetActive(false);
+            vidaOFF2.SetActive(false);
+            vidaOFF3.SetActive(true);
+            vidaOFF4.SetActive(true);
+            vidaOFF5.SetActive(true);
+        }
+        else if (vidas == 1)
+        {
+            vidaON1.SetActive(true);
+            vidaON2.SetActive(false);
+            vidaON3.SetActive(false);
+            vidaON4.SetActive(false);
+            vidaON5.SetActive(false);
+            vidaOFF1.SetActive(false);
+            vidaOFF2.SetActive(true);
+            vidaOFF3.SetActive(true);
+            vidaOFF4.SetActive(true);
+            vidaOFF5.SetActive(true);
+        }
+        else
+        {
+            vidaON1.SetActive(false);
+            vidaON2.SetActive(false);
+            vidaON3.SetActive(false);
+            vidaON4.SetActive(false);
+            vidaON5.SetActive(false);
+            vidaOFF1.SetActive(true);
+            vidaOFF2.SetActive(true);
+            vidaOFF3.SetActive(true);
+            vidaOFF4.SetActive(true);
+            vidaOFF5.SetActive(true);
         }
     }
 }

@@ -31,6 +31,12 @@ class ProjectileControl : MonoBehaviour
             slimeVar.Damage();
             Destroy(gameObject);
         }
+        if (other.gameObject.tag == "EnemyPan")
+        {
+            PanController panVar = other.gameObject.GetComponent<PanController>();
+            panVar.Damage();
+            Destroy(gameObject);
+        }
     }
 
     void Destruction()

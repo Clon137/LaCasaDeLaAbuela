@@ -1945,7 +1945,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EC: {fileID: 1641212200}
   EContenedor: {fileID: 0}
+  oleadaGoing: 0
   Oleada: {fileID: 1309811879}
+  puerta: {fileID: 1622714463}
 --- !u!1 &112158157
 GameObject:
   m_ObjectHideFlags: 0
@@ -5576,7 +5578,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: c528c0deaea06194696af3ee114f2363, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5597,7 +5599,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -5617,7 +5619,7 @@ MonoBehaviour:
   firstCamera: {fileID: 1261675135}
   secondCamera: {fileID: 662187873}
   thirdCamera: {fileID: 1125809710}
-  distanceFromCamera: 5
+  distanceFromCamera: 10
 --- !u!1 &436733693
 GameObject:
   m_ObjectHideFlags: 0
@@ -17911,8 +17913,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8, y: 1, z: 1.8}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.8000001, y: 1, z: 2.4728193}
+  m_Center: {x: 0, y: 0, z: 0.33640903}
 --- !u!1 &1429789245
 GameObject:
   m_ObjectHideFlags: 0
@@ -20261,6 +20263,11 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1 &1622714463 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8876021606055872127, guid: bfa974a01b4cbd94eb18f3e7956f9aca, type: 3}
+  m_PrefabInstance: {fileID: 2085905341}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1635191729
 GameObject:
   m_ObjectHideFlags: 0
@@ -20427,11 +20434,11 @@ MonoBehaviour:
   vidaON3: {fileID: 1269437703}
   vidaON4: {fileID: 1344902341}
   vidaON5: {fileID: 2010549337}
-  vidaOFF1: {fileID: 0}
-  vidaOFF2: {fileID: 0}
-  vidaOFF3: {fileID: 0}
-  vidaOFF4: {fileID: 0}
-  vidaOFF5: {fileID: 0}
+  vidaOFF1: {fileID: 880549952}
+  vidaOFF2: {fileID: 456422618}
+  vidaOFF3: {fileID: 260067731}
+  vidaOFF4: {fileID: 1542164553}
+  vidaOFF5: {fileID: 23449676}
   MunicionON1: {fileID: 1293937932}
   MunicionON2: {fileID: 713434052}
   MunicionON3: {fileID: 1864961576}
@@ -20632,12 +20639,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a25a7bb0d9cfa3f45b3f9c2b286025db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 10
+  OC: {fileID: 103977717}
+  cooldown: 1
   cooldownMax: 15
   enemies:
   - {fileID: 8123047365476163374, guid: 814eedd96c39a5041ae729df01be8697, type: 3}
   - {fileID: 2968613009650145182, guid: d41b99171557b9746ae9d47f49035c37, type: 3}
   - {fileID: 4580236830582229882, guid: e34ed6e1538f02546bf0873080ebc02a, type: 3}
+  - {fileID: 3081923498047588248, guid: 54c92a3318b81184989a442d5aecb81e, type: 3}
+  - {fileID: 9197331354328550957, guid: 43e89103c34a6fd459c62bdb63ad37a8, type: 3}
+  - {fileID: 544914093200827161, guid: b5113d07f26cb834f8647c88c62a3e90, type: 3}
   - {fileID: 8147960498628619309, guid: 8c7e7b1fb60a3e64aad4f864ad09d473, type: 3}
   maxRandom: 3
   ventana1: {fileID: 383796997}
@@ -25371,6 +25382,10 @@ PrefabInstance:
     - target: {fileID: 2160559851638519360, guid: bfa974a01b4cbd94eb18f3e7956f9aca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486370789847525827, guid: bfa974a01b4cbd94eb18f3e7956f9aca, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8329427555966365835, guid: bfa974a01b4cbd94eb18f3e7956f9aca, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'

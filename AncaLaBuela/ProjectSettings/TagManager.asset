@@ -11,6 +11,8 @@ TagManager:
   - Enemy1
   - Bajar
   - Subir
+  - Enemy2
+  - EnemyPan
   layers:
   - Default
   - TransparentFX

@@ -7,8 +7,10 @@ public class OleadaController : MonoBehaviour
     public GameObject EContenedor;
     int oleadaCount = 1;
     float oleadaTime = 120;
-    bool oleadaGoing = false;
+    public bool oleadaGoing = false;
+    float restTime = 30;
     [SerializeField] TMP_Text Oleada;
+    [SerializeField] GameObject puerta;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,25 +24,62 @@ public class OleadaController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (oleadaGoing) {oleadaTime -= Time.deltaTime;}
+        if (oleadaGoing)
+        {
+            oleadaTime -= Time.deltaTime;
+            Oleada.text = "Oleada " + oleadaCount + " Tiempo: " + oleadaTime.ToString("0");
+        }
+        else if (oleadaCount >= 2)
+        {
+            if (oleadaCount > 6)
+            {
+                Oleada.text = "Nivel Completado";
+                puerta.transform.rotation *= Quaternion.Euler(0, 135, 0);
+            }
+            restTime -= Time.deltaTime;
+            Oleada.text = "Prepárate " + restTime.ToString("0");
+            if (restTime <= 0) { StartOleada(); }
+        }
         if (oleadaTime <= 0)
         {
             EndOleada();
             oleadaCount += 1;
             oleadaTime = 120;
-            Oleada.text = "Oleada " + oleadaCount;
         }
     }
 
     void StartOleada()
     {
-        oleadaGoing = true;        
-        if (oleadaCount == 2) {EC.cooldownMax = 12;}
+        oleadaGoing = true;
+        if (oleadaCount == 2)
+        {
+            EC.cooldownMax = 12;
+            EC.maxRandom = 4;
+        }
+        if (oleadaCount == 3)
+        {
+            EC.cooldownMax = 10;
+            EC.maxRandom = 5;            
+        }
+        if (oleadaCount == 4)
+        {
+            EC.cooldownMax = 8;
+            EC.maxRandom = 6;            
+        }
+        if (oleadaCount == 5)
+        {
+            EC.cooldownMax = 6;
+            EC.maxRandom = 7;            
+        }
+        if (oleadaCount == 6)
+        {
+            EC.cooldownMax = 5;
+            // EC.maxRandom = 8;            
+        }
     }
 
     void EndOleada()
     {
         oleadaGoing = false;
-        Invoke("StartOleada", 30);
     }
 }

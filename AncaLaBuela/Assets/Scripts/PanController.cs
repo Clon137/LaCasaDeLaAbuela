@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyPersonalControl : MonoBehaviour
+public class PanController : MonoBehaviour
 {
-    [SerializeField] float health = 1;
+    [SerializeField] float health = 2;
     NavMeshAgent agent;
     PlayerController controladorVida;
     [SerializeField] GameObject Player;
@@ -11,7 +11,7 @@ public class EnemyPersonalControl : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        agent = gameObject.GetComponent<NavMeshAgent>();
         Player = GameObject.Find("Player");
         controladorVida = Player.GetComponent<PlayerController>();
     }
@@ -29,6 +29,11 @@ public class EnemyPersonalControl : MonoBehaviour
     public void Damage()
     {
         health -= 1;
-        if (health < 1) {Destroy(gameObject);}
+        float distance = Random.Range(-5, 5);
+        transform.position += new Vector3 (0, 0, distance);
+        if (health < 1)
+        {
+            Destroy(gameObject);
+        }
     }
 }
