@@ -1,10 +1,16 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] Rigidbody rb;
     [SerializeField] GameObject player;
     [SerializeField] float moveSpeed = 7;
+    [SerializeField] Camera cam;
+    private Vector3 CamForward;
+    private Vector3 CamRight;
+    private Vector3 MoverPlayer;
+    private Vector3 playerInput;
     public float groundDrag = 4;
     public float airMultiplier = 0.4f;
     float horizontalInput;
@@ -109,8 +115,13 @@ public class PlayerController : MonoBehaviour
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
 
+
         MyInput();
         SpeedControl();
+        CamDirection();
+
+        MoverPlayer = playerInput.x * CamRight + playerInput.z * CamForward;
+        player.transform.LookAt(player.transform.position + MoverPlayer);
 
         HUDf();
 
@@ -119,6 +130,15 @@ public class PlayerController : MonoBehaviour
         else
             rb.linearDamping = 0;
 
+    }
+
+    void CamDirection(){
+        CamForward = cam.transform.forward;
+        CamRight = cam.transform.right;
+        CamForward.y = 0;
+        CamRight.y = 0;
+        CamForward = CamForward.normalized;
+        CamRight = CamRight.normalized;
     }
 
     private void FixedUpdate()
@@ -178,6 +198,12 @@ public class PlayerController : MonoBehaviour
                 player.SetActive(true);
             }
         }
+        //Recargar
+        if (Input.GetKeyDown(KeyCode.F)){
+            if (ammoCanvas){
+                ammo = 5;
+            }
+        }
 
         if (Input.GetMouseButtonDown(0)) // Detectar clic izquierdo
         {
@@ -231,6 +257,9 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Ammo")
         {
             ammoCanvas.SetActive(true);
+        }
+        if (other.gameObject.tag == "Finish"){
+            SceneManager.LoadScene("Level2");
         }
     }
     //aparecen los interactuadores
@@ -296,7 +325,7 @@ public class PlayerController : MonoBehaviour
                 // Instanciar el proyectil en el firePoint
                 GameObject projectile = Instantiate(projectilePrefab, firePoint3.position, weapon3.transform.rotation);
 
-                // Calcular dirección hacia la mira
+                // Calcular direccion hacia la mira
                 Vector3 direction = (mira.transform.position - firePoint3.position).normalized;
 
                 // Aplicar velocidad al proyectil
