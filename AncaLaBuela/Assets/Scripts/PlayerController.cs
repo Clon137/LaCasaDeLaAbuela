@@ -1,6 +1,4 @@
 using UnityEngine;
-using TMPro;
-using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {
@@ -100,9 +98,9 @@ public class PlayerController : MonoBehaviour
         weapon1.SetActive(false);
         weapon2.SetActive(false);
         weapon3.SetActive(false);
-        arma[0] = "pistola";
-        arma[1] = "escopeta";
-        arma[2] = "fusil";
+        // arma[0] = "pistola";
+        // arma[1] = "escopeta";
+        // arma[2] = "fusil";
         armaNum = 0;
     }
 
@@ -114,10 +112,13 @@ public class PlayerController : MonoBehaviour
         MyInput();
         SpeedControl();
 
+        HUDf();
+
         if (grounded)
             rb.linearDamping = groundDrag;
         else
             rb.linearDamping = 0;
+
     }
 
     private void FixedUpdate()
@@ -127,6 +128,8 @@ public class PlayerController : MonoBehaviour
             MovePlayer();
         }
     }
+
+
 
     void MyInput()
     {
@@ -312,9 +315,10 @@ public class PlayerController : MonoBehaviour
     }
 
     //Las balas encendiendose y apagandose
-    void HUD(){
-        if (ammo <= 5){
-            print("5");
+    void HUDf()
+    {
+        if (ammo == 5)
+        {            
             MunicionON1.SetActive(true);
             MunicionON2.SetActive(true);
             MunicionON3.SetActive(true);
@@ -325,8 +329,9 @@ public class PlayerController : MonoBehaviour
             MunicionOFF3.SetActive(false);
             MunicionOFF4.SetActive(false);
             MunicionOFF5.SetActive(false);
-        } else if (ammo <= 4){
-            print("4");
+        }
+        else if (ammo == 4)
+        {            
             MunicionON1.SetActive(true);
             MunicionON2.SetActive(true);
             MunicionON3.SetActive(true);
@@ -337,8 +342,9 @@ public class PlayerController : MonoBehaviour
             MunicionOFF3.SetActive(false);
             MunicionOFF4.SetActive(false);
             MunicionOFF5.SetActive(true);
-        } else if (ammo <= 3){
-            print("3");
+        }
+        else if (ammo == 3)
+        {            
             MunicionON1.SetActive(true);
             MunicionON2.SetActive(true);
             MunicionON3.SetActive(true);
@@ -349,8 +355,9 @@ public class PlayerController : MonoBehaviour
             MunicionOFF3.SetActive(false);
             MunicionOFF4.SetActive(true);
             MunicionOFF5.SetActive(true);
-        } else if (ammo <= 2){
-            print("2");
+        }
+        else if (ammo == 2)
+        {            
             MunicionON1.SetActive(true);
             MunicionON2.SetActive(true);
             MunicionON3.SetActive(false);
@@ -361,8 +368,9 @@ public class PlayerController : MonoBehaviour
             MunicionOFF3.SetActive(true);
             MunicionOFF4.SetActive(true);
             MunicionOFF5.SetActive(true);
-        } else if (ammo <= 1){
-            print("1");
+        }
+        else if (ammo == 1)
+        {            
             MunicionON1.SetActive(true);
             MunicionON2.SetActive(false);
             MunicionON3.SetActive(false);
@@ -373,8 +381,9 @@ public class PlayerController : MonoBehaviour
             MunicionOFF3.SetActive(true);
             MunicionOFF4.SetActive(true);
             MunicionOFF5.SetActive(true);
-        } else if (ammo <= 0){
-            print("0");
+        }
+        else if (ammo <= 0)
+        {            
             MunicionON1.SetActive(false);
             MunicionON2.SetActive(false);
             MunicionON3.SetActive(false);
@@ -385,6 +394,6 @@ public class PlayerController : MonoBehaviour
             MunicionOFF3.SetActive(true);
             MunicionOFF4.SetActive(true);
             MunicionOFF5.SetActive(true);
-        } 
+        }
     }
 }

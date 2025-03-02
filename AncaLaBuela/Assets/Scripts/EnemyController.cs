@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
     
     [SerializeField] GameObject[] enemies;
     int randomNum;
-    public int maxRandom = 3;
+    public int maxRandom = 4;
     int randomPlace;
     [SerializeField] Transform ventana1;
     [SerializeField] Transform ventana2;
