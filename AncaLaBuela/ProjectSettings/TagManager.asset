@@ -9,6 +9,8 @@ TagManager:
   - VentanaControl3
   - Ammo
   - Enemy1
+  - Bajar
+  - Subir
   layers:
   - Default
   - TransparentFX

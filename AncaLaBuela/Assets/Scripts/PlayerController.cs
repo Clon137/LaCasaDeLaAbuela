@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] Rigidbody rb;
+    [SerializeField] GameObject player;
     [SerializeField] float moveSpeed = 7;
     public float groundDrag = 4;
     public float airMultiplier = 0.4f;
@@ -53,6 +54,28 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int ammo = 5;
     string[] arma;
     int armaNum = 0;
+
+    [Header("HUD")]
+    [SerializeField] GameObject vidaON1;
+    [SerializeField] GameObject vidaON2;
+    [SerializeField] GameObject vidaON3;
+    [SerializeField] GameObject vidaON4;
+    [SerializeField] GameObject vidaON5;
+    [SerializeField] GameObject vidaOFF1;
+    [SerializeField] GameObject vidaOFF2;
+    [SerializeField] GameObject vidaOFF3;
+    [SerializeField] GameObject vidaOFF4;
+    [SerializeField] GameObject vidaOFF5;
+    [SerializeField] GameObject MunicionON1;
+    [SerializeField] GameObject MunicionON2;
+    [SerializeField] GameObject MunicionON3;
+    [SerializeField] GameObject MunicionON4;
+    [SerializeField] GameObject MunicionON5;
+    [SerializeField] GameObject MunicionOFF1;
+    [SerializeField] GameObject MunicionOFF2;
+    [SerializeField] GameObject MunicionOFF3;
+    [SerializeField] GameObject MunicionOFF4;
+    [SerializeField] GameObject MunicionOFF5;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -118,6 +141,7 @@ public class PlayerController : MonoBehaviour
                 mira.SetActive(true);
                 camara1 = true;
                 weapon1.SetActive(true);
+                player.SetActive(false);
             }
             else if (!camara2 && ventana2)
             {
@@ -125,6 +149,7 @@ public class PlayerController : MonoBehaviour
                 mira.SetActive(true);
                 camara2 = true;
                 weapon2.SetActive(true);
+                player.SetActive(false);
             }
             else if (!camara3 && ventana3)
             {
@@ -132,6 +157,7 @@ public class PlayerController : MonoBehaviour
                 mira.SetActive(true);
                 camara3 = true;
                 weapon3.SetActive(true);
+                player.SetActive(false);
             }
             else
             {
@@ -146,6 +172,7 @@ public class PlayerController : MonoBehaviour
                 weapon1.SetActive(false);
                 weapon2.SetActive(false);
                 weapon3.SetActive(false);
+                player.SetActive(true);
             }
         }
 
@@ -203,7 +230,7 @@ public class PlayerController : MonoBehaviour
             ammoCanvas.SetActive(true);
         }
     }
-
+    //aparecen los interactuadores
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "VentanaControl")
@@ -282,5 +309,82 @@ public class PlayerController : MonoBehaviour
     void Cooldown()
     {
         canShot = true;
+    }
+
+    //Las balas encendiendose y apagandose
+    void HUD(){
+        if (ammo <= 5){
+            print("5");
+            MunicionON1.SetActive(true);
+            MunicionON2.SetActive(true);
+            MunicionON3.SetActive(true);
+            MunicionON4.SetActive(true);
+            MunicionON5.SetActive(true);
+            MunicionOFF1.SetActive(false);
+            MunicionOFF2.SetActive(false);
+            MunicionOFF3.SetActive(false);
+            MunicionOFF4.SetActive(false);
+            MunicionOFF5.SetActive(false);
+        } else if (ammo <= 4){
+            print("4");
+            MunicionON1.SetActive(true);
+            MunicionON2.SetActive(true);
+            MunicionON3.SetActive(true);
+            MunicionON4.SetActive(true);
+            MunicionON5.SetActive(false);
+            MunicionOFF1.SetActive(false);
+            MunicionOFF2.SetActive(false);
+            MunicionOFF3.SetActive(false);
+            MunicionOFF4.SetActive(false);
+            MunicionOFF5.SetActive(true);
+        } else if (ammo <= 3){
+            print("3");
+            MunicionON1.SetActive(true);
+            MunicionON2.SetActive(true);
+            MunicionON3.SetActive(true);
+            MunicionON4.SetActive(false);
+            MunicionON5.SetActive(false);
+            MunicionOFF1.SetActive(false);
+            MunicionOFF2.SetActive(false);
+            MunicionOFF3.SetActive(false);
+            MunicionOFF4.SetActive(true);
+            MunicionOFF5.SetActive(true);
+        } else if (ammo <= 2){
+            print("2");
+            MunicionON1.SetActive(true);
+            MunicionON2.SetActive(true);
+            MunicionON3.SetActive(false);
+            MunicionON4.SetActive(false);
+            MunicionON5.SetActive(false);
+            MunicionOFF1.SetActive(false);
+            MunicionOFF2.SetActive(false);
+            MunicionOFF3.SetActive(true);
+            MunicionOFF4.SetActive(true);
+            MunicionOFF5.SetActive(true);
+        } else if (ammo <= 1){
+            print("1");
+            MunicionON1.SetActive(true);
+            MunicionON2.SetActive(false);
+            MunicionON3.SetActive(false);
+            MunicionON4.SetActive(false);
+            MunicionON5.SetActive(false);
+            MunicionOFF1.SetActive(false);
+            MunicionOFF2.SetActive(true);
+            MunicionOFF3.SetActive(true);
+            MunicionOFF4.SetActive(true);
+            MunicionOFF5.SetActive(true);
+        } else if (ammo <= 0){
+            print("0");
+            MunicionON1.SetActive(false);
+            MunicionON2.SetActive(false);
+            MunicionON3.SetActive(false);
+            MunicionON4.SetActive(false);
+            MunicionON5.SetActive(false);
+            MunicionOFF1.SetActive(true);
+            MunicionOFF2.SetActive(true);
+            MunicionOFF3.SetActive(true);
+            MunicionOFF4.SetActive(true);
+            MunicionOFF5.SetActive(true);
+        } 
     }
 }

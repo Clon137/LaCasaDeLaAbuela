@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class OleadaController : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class OleadaController : MonoBehaviour
     int oleadaCount = 1;
     float oleadaTime = 120;
     bool oleadaGoing = false;
+    [SerializeField] TMP_Text Oleada;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,6 +16,7 @@ public class OleadaController : MonoBehaviour
         EContenedor = GameObject.Find("EnemyControl");
         EC = EContenedor.GetComponent<EnemyController>();
         Invoke("StartOleada", 10);
+        Oleada.text = "Oleada " + oleadaCount;
     }
 
     // Update is called once per frame
@@ -25,6 +28,7 @@ public class OleadaController : MonoBehaviour
             EndOleada();
             oleadaCount += 1;
             oleadaTime = 120;
+            Oleada.text = "Oleada " + oleadaCount;
         }
     }
 
