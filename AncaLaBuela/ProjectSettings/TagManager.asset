@@ -14,6 +14,9 @@ TagManager:
   - Enemy2
   - EnemyPan
   - EnemyFantasma
+  - ArmaCompra
+  - Ciervo
+  - Vida
   layers:
   - Default
   - TransparentFX

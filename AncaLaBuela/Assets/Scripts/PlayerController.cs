@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -30,6 +31,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject ventanaCanvas2;
     [SerializeField] GameObject ventanaCanvas3;
     [SerializeField] GameObject ammoCanvas;
+    [SerializeField] GameObject weaponCont;
+    [SerializeField] int precioCompra = 400;
+    [SerializeField] GameObject weaponCanvas;
+    bool weaponS = false;
+    [SerializeField] GameObject vidaCanvas;
+    bool vidaT = false;
+    [SerializeField] int precioVida = 50;
 
     [SerializeField] GameObject cameraMain;
     [SerializeField] GameObject camera1;
@@ -52,6 +60,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform firePoint1;
     [SerializeField] Transform firePoint2;
     [SerializeField] Transform firePoint3;
+    [SerializeField] Transform firePointf1;
+    [SerializeField] Transform firePointf2;
+    [SerializeField] Transform firePointf3;
     [SerializeField] float coolD = 1f;
     bool canShot = true;
 
@@ -81,6 +92,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject MunicionOFF3;
     [SerializeField] GameObject MunicionOFF4;
     [SerializeField] GameObject MunicionOFF5;
+    [SerializeField] GameObject MunTextCont;
+    [SerializeField] TMP_Text MunText;
     [Header("Sonidos")]
     public AudioSource Recarga;
 
@@ -96,6 +109,8 @@ public class PlayerController : MonoBehaviour
         ventanaCanvas2.SetActive(false);
         ventanaCanvas3.SetActive(false);
         ammoCanvas.SetActive(false);
+        weaponCanvas.SetActive(false);
+        vidaCanvas.SetActive(false);
 
         cameraMain.SetActive(true);
         camera1.SetActive(false);
@@ -109,6 +124,7 @@ public class PlayerController : MonoBehaviour
         weapon1.SetActive(false);
         weapon2.SetActive(false);
         weapon3.SetActive(false);
+        MunTextCont.SetActive(false);
         // arma[0] = "pistola";
         // arma[1] = "escopeta";
         // arma[2] = "fusil";
@@ -137,7 +153,8 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void CamDirection(){
+    void CamDirection()
+    {
         CamForward = cam.transform.forward;
         CamRight = cam.transform.right;
         CamForward.y = 0;
@@ -204,10 +221,41 @@ public class PlayerController : MonoBehaviour
             }
         }
         //Recargar
-        if (Input.GetKeyDown(KeyCode.F)){
-            if (ammoCanvas){
-                ammo = 5;
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (ammoCanvas)
+            {
+                if (OleadaController.pistol)
+                {
+                    ammo = 5;
+                }
+                else
+                {
+                    ammo = 30;
+                }
                 Recarga.Play();
+            }
+            if (weaponS)
+            {
+                if (OleadaController.Puntos >= precioCompra)
+                {
+                    OleadaController.Puntos -= precioCompra;
+                    ammo = 30;
+                    OleadaController.pistol = false;
+                    Destroy(weaponCont);
+                    MunTextCont.SetActive(true);
+                    HUDf();
+                    weaponS = false;
+                }
+            }
+            if (vidaT)
+            {
+                if (OleadaController.Puntos >= precioVida)
+                {
+                    OleadaController.Puntos -= precioCompra;
+                    vidas++;                    
+                    Vida();                    
+                }
             }
         }
 
@@ -224,7 +272,18 @@ public class PlayerController : MonoBehaviour
 
         // on ground
         if (grounded)
+        {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+
+            // if (moveDirection != Vector3.zero)
+            // { 
+            //     // rb.freezeRotation = false; 
+            //     Quaternion deltaRotation = Quaternion.Euler(moveDirection * 100 * Time.deltaTime);
+            //     rb.MoveRotation(rb.rotation * deltaRotation);
+            //     // rb.freezeRotation = true; 
+            // }
+
+        }
 
         // in air
         else if (!grounded)
@@ -264,7 +323,18 @@ public class PlayerController : MonoBehaviour
         {
             ammoCanvas.SetActive(true);
         }
-        if (other.gameObject.tag == "Finish"){
+        if (other.gameObject.tag == "ArmaCompra")
+        {
+            weaponCanvas.SetActive(true);
+            weaponS = true;
+        }
+        if (other.gameObject.tag == "Vida")
+        {
+            vidaCanvas.SetActive(true);
+            vidaT = true;
+        }
+        if (other.gameObject.tag == "Finish")
+        {
             SceneManager.LoadScene("Level2");
         }
     }
@@ -290,6 +360,16 @@ public class PlayerController : MonoBehaviour
         {
             ammoCanvas.SetActive(false);
         }
+        if (other.gameObject.tag == "ArmaCompra")
+        {
+            weaponCanvas.SetActive(false);
+            weaponS = false;
+        }
+        if (other.gameObject.tag == "Vida")
+        {
+            vidaCanvas.SetActive(false);
+            vidaT = false;
+        }
     }
 
     void Shoot()
@@ -298,48 +378,102 @@ public class PlayerController : MonoBehaviour
         {
             if (camara1)
             {
-                // Instanciar el proyectil en el firePoint
-                GameObject projectile = Instantiate(projectilePrefab, firePoint1.position, weapon1.transform.rotation);
+                if (OleadaController.pistol)
+                {
+                    // Instanciar el proyectil en el firePoint
+                    GameObject projectile = Instantiate(projectilePrefab, firePoint1.position, weapon1.transform.rotation);
 
-                // Calcular dirección hacia la mira
-                Vector3 direction = (mira.transform.position - firePoint1.position).normalized;
+                    // Calcular dirección hacia la mira
+                    Vector3 direction = (mira.transform.position - firePoint1.position).normalized;
 
-                // Aplicar velocidad al proyectil
-                Rigidbody rb = projectile.GetComponent<Rigidbody>();
-                rb.linearVelocity = direction * projectileSpeed;
-                canShot = false;
-                Invoke("Cooldown", coolD);
-                ammo -= 1;
+                    // Aplicar velocidad al proyectil
+                    Rigidbody rb = projectile.GetComponent<Rigidbody>();
+                    rb.linearVelocity = direction * projectileSpeed;
+                    canShot = false;
+                    Invoke("Cooldown", coolD);
+                    ammo -= 1;
+                }
+                else
+                {
+                    // Instanciar el proyectil en el firePoint
+                    GameObject projectile = Instantiate(projectilePrefab, firePointf1.position, weapon1.transform.rotation);
+
+                    // Calcular dirección hacia la mira
+                    Vector3 direction = (mira.transform.position - firePointf1.position).normalized;
+
+                    // Aplicar velocidad al proyectil
+                    Rigidbody rb = projectile.GetComponent<Rigidbody>();
+                    rb.linearVelocity = direction * projectileSpeed;
+                    canShot = false;
+                    Invoke("Cooldown", coolD);
+                    ammo -= 1;
+                }
             }
             else if (camara2)
             {
-                // Instanciar el proyectil en el firePoint
-                GameObject projectile = Instantiate(projectilePrefab, firePoint2.position, weapon2.transform.rotation);
+                if (OleadaController.pistol)
+                {
+                    // Instanciar el proyectil en el firePoint
+                    GameObject projectile = Instantiate(projectilePrefab, firePoint2.position, weapon2.transform.rotation);
 
-                // Calcular dirección hacia la mira
-                Vector3 direction = (mira.transform.position - firePoint2.position).normalized;
+                    // Calcular dirección hacia la mira
+                    Vector3 direction = (mira.transform.position - firePoint2.position).normalized;
 
-                // Aplicar velocidad al proyectil
-                Rigidbody rb = projectile.GetComponent<Rigidbody>();
-                rb.linearVelocity = direction * projectileSpeed;
-                canShot = false;
-                Invoke("Cooldown", coolD);
-                ammo -= 1;
+                    // Aplicar velocidad al proyectil
+                    Rigidbody rb = projectile.GetComponent<Rigidbody>();
+                    rb.linearVelocity = direction * projectileSpeed;
+                    canShot = false;
+                    Invoke("Cooldown", coolD);
+                    ammo -= 1;
+                }
+                else
+                {
+                    // Instanciar el proyectil en el firePoint
+                    GameObject projectile = Instantiate(projectilePrefab, firePointf2.position, weapon2.transform.rotation);
+
+                    // Calcular dirección hacia la mira
+                    Vector3 direction = (mira.transform.position - firePointf2.position).normalized;
+
+                    // Aplicar velocidad al proyectil
+                    Rigidbody rb = projectile.GetComponent<Rigidbody>();
+                    rb.linearVelocity = direction * projectileSpeed;
+                    canShot = false;
+                    Invoke("Cooldown", coolD);
+                    ammo -= 1;
+                }
             }
             else if (camara3)
             {
-                // Instanciar el proyectil en el firePoint
-                GameObject projectile = Instantiate(projectilePrefab, firePoint3.position, weapon3.transform.rotation);
+                if (OleadaController.pistol)
+                {
+                    // Instanciar el proyectil en el firePoint
+                    GameObject projectile = Instantiate(projectilePrefab, firePoint3.position, weapon3.transform.rotation);
 
-                // Calcular direccion hacia la mira
-                Vector3 direction = (mira.transform.position - firePoint3.position).normalized;
+                    // Calcular direccion hacia la mira
+                    Vector3 direction = (mira.transform.position - firePoint3.position).normalized;
 
-                // Aplicar velocidad al proyectil
-                Rigidbody rb = projectile.GetComponent<Rigidbody>();
-                rb.linearVelocity = direction * projectileSpeed;
-                canShot = false;
-                Invoke("Cooldown", coolD);
-                ammo -= 1;
+                    // Aplicar velocidad al proyectil
+                    Rigidbody rb = projectile.GetComponent<Rigidbody>();
+                    rb.linearVelocity = direction * projectileSpeed;
+                    canShot = false;
+                    Invoke("Cooldown", coolD);
+                    ammo -= 1;
+                }
+                else
+                {
+                    // Instanciar el proyectil en el firePoint
+                    GameObject projectile = Instantiate(projectilePrefab, firePointf3.position, weapon3.transform.rotation);
+
+                    // Calcular direccion hacia la mira
+                    Vector3 direction = (mira.transform.position - firePointf3.position).normalized;
+
+                    // Aplicar velocidad al proyectil
+                    Rigidbody rb = projectile.GetComponent<Rigidbody>();
+                    rb.linearVelocity = direction * projectileSpeed;
+                    canShot = false;
+                    Invoke("Cooldown", coolD);
+                    ammo -= 1;
+                }
             }
         }
     }
@@ -352,89 +486,107 @@ public class PlayerController : MonoBehaviour
     //Las balas encendiendose y apagandose
     void HUDf()
     {
-        if (ammo == 5)
-        {            
+        if (OleadaController.pistol)
+        {
+            if (ammo == 5)
+            {
+                MunicionON1.SetActive(true);
+                MunicionON2.SetActive(true);
+                MunicionON3.SetActive(true);
+                MunicionON4.SetActive(true);
+                MunicionON5.SetActive(true);
+                MunicionOFF1.SetActive(false);
+                MunicionOFF2.SetActive(false);
+                MunicionOFF3.SetActive(false);
+                MunicionOFF4.SetActive(false);
+                MunicionOFF5.SetActive(false);
+            }
+            else if (ammo == 4)
+            {
+                MunicionON1.SetActive(true);
+                MunicionON2.SetActive(true);
+                MunicionON3.SetActive(true);
+                MunicionON4.SetActive(true);
+                MunicionON5.SetActive(false);
+                MunicionOFF1.SetActive(false);
+                MunicionOFF2.SetActive(false);
+                MunicionOFF3.SetActive(false);
+                MunicionOFF4.SetActive(false);
+                MunicionOFF5.SetActive(true);
+            }
+            else if (ammo == 3)
+            {
+                MunicionON1.SetActive(true);
+                MunicionON2.SetActive(true);
+                MunicionON3.SetActive(true);
+                MunicionON4.SetActive(false);
+                MunicionON5.SetActive(false);
+                MunicionOFF1.SetActive(false);
+                MunicionOFF2.SetActive(false);
+                MunicionOFF3.SetActive(false);
+                MunicionOFF4.SetActive(true);
+                MunicionOFF5.SetActive(true);
+            }
+            else if (ammo == 2)
+            {
+                MunicionON1.SetActive(true);
+                MunicionON2.SetActive(true);
+                MunicionON3.SetActive(false);
+                MunicionON4.SetActive(false);
+                MunicionON5.SetActive(false);
+                MunicionOFF1.SetActive(false);
+                MunicionOFF2.SetActive(false);
+                MunicionOFF3.SetActive(true);
+                MunicionOFF4.SetActive(true);
+                MunicionOFF5.SetActive(true);
+            }
+            else if (ammo == 1)
+            {
+                MunicionON1.SetActive(true);
+                MunicionON2.SetActive(false);
+                MunicionON3.SetActive(false);
+                MunicionON4.SetActive(false);
+                MunicionON5.SetActive(false);
+                MunicionOFF1.SetActive(false);
+                MunicionOFF2.SetActive(true);
+                MunicionOFF3.SetActive(true);
+                MunicionOFF4.SetActive(true);
+                MunicionOFF5.SetActive(true);
+            }
+            else if (ammo <= 0)
+            {
+                MunicionON1.SetActive(false);
+                MunicionON2.SetActive(false);
+                MunicionON3.SetActive(false);
+                MunicionON4.SetActive(false);
+                MunicionON5.SetActive(false);
+                MunicionOFF1.SetActive(true);
+                MunicionOFF2.SetActive(true);
+                MunicionOFF3.SetActive(true);
+                MunicionOFF4.SetActive(true);
+                MunicionOFF5.SetActive(true);
+            }
+        }
+        else
+        {
             MunicionON1.SetActive(true);
-            MunicionON2.SetActive(true);
-            MunicionON3.SetActive(true);
-            MunicionON4.SetActive(true);
-            MunicionON5.SetActive(true);
+            MunicionON2.SetActive(false);
+            MunicionON3.SetActive(false);
+            MunicionON4.SetActive(false);
+            MunicionON5.SetActive(false);
             MunicionOFF1.SetActive(false);
             MunicionOFF2.SetActive(false);
             MunicionOFF3.SetActive(false);
             MunicionOFF4.SetActive(false);
             MunicionOFF5.SetActive(false);
-        }
-        else if (ammo == 4)
-        {            
-            MunicionON1.SetActive(true);
-            MunicionON2.SetActive(true);
-            MunicionON3.SetActive(true);
-            MunicionON4.SetActive(true);
-            MunicionON5.SetActive(false);
-            MunicionOFF1.SetActive(false);
-            MunicionOFF2.SetActive(false);
-            MunicionOFF3.SetActive(false);
-            MunicionOFF4.SetActive(false);
-            MunicionOFF5.SetActive(true);
-        }
-        else if (ammo == 3)
-        {            
-            MunicionON1.SetActive(true);
-            MunicionON2.SetActive(true);
-            MunicionON3.SetActive(true);
-            MunicionON4.SetActive(false);
-            MunicionON5.SetActive(false);
-            MunicionOFF1.SetActive(false);
-            MunicionOFF2.SetActive(false);
-            MunicionOFF3.SetActive(false);
-            MunicionOFF4.SetActive(true);
-            MunicionOFF5.SetActive(true);
-        }
-        else if (ammo == 2)
-        {            
-            MunicionON1.SetActive(true);
-            MunicionON2.SetActive(true);
-            MunicionON3.SetActive(false);
-            MunicionON4.SetActive(false);
-            MunicionON5.SetActive(false);
-            MunicionOFF1.SetActive(false);
-            MunicionOFF2.SetActive(false);
-            MunicionOFF3.SetActive(true);
-            MunicionOFF4.SetActive(true);
-            MunicionOFF5.SetActive(true);
-        }
-        else if (ammo == 1)
-        {            
-            MunicionON1.SetActive(true);
-            MunicionON2.SetActive(false);
-            MunicionON3.SetActive(false);
-            MunicionON4.SetActive(false);
-            MunicionON5.SetActive(false);
-            MunicionOFF1.SetActive(false);
-            MunicionOFF2.SetActive(true);
-            MunicionOFF3.SetActive(true);
-            MunicionOFF4.SetActive(true);
-            MunicionOFF5.SetActive(true);
-        }
-        else if (ammo <= 0)
-        {            
-            MunicionON1.SetActive(false);
-            MunicionON2.SetActive(false);
-            MunicionON3.SetActive(false);
-            MunicionON4.SetActive(false);
-            MunicionON5.SetActive(false);
-            MunicionOFF1.SetActive(true);
-            MunicionOFF2.SetActive(true);
-            MunicionOFF3.SetActive(true);
-            MunicionOFF4.SetActive(true);
-            MunicionOFF5.SetActive(true);
+            MunTextCont.SetActive(true);
+            MunText.text = "x " + ammo;
         }
     }
 
     public void Damage()
     {
-        vidas --;
+        vidas--;
         Vida();
         if (vidas < 0)
         {

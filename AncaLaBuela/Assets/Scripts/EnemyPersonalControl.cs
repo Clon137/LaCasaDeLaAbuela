@@ -7,6 +7,7 @@ public class EnemyPersonalControl : MonoBehaviour
     NavMeshAgent agent;
     PlayerController controladorVida;
     [SerializeField] GameObject Player;
+    [SerializeField] int rangoAtaque = 2;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,7 +20,7 @@ public class EnemyPersonalControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (agent.remainingDistance < 2)
+        if (agent.remainingDistance < rangoAtaque)
         {
             controladorVida.Damage();
             Destroy(gameObject);

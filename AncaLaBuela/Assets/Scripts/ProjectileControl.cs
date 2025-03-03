@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [SerializeField]
 class ProjectileControl : MonoBehaviour
@@ -14,7 +15,7 @@ class ProjectileControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,6 +23,10 @@ class ProjectileControl : MonoBehaviour
         if (other.gameObject.tag == "Enemy1")
         {
             EnemyPersonalControl enemyVar = other.gameObject.GetComponent<EnemyPersonalControl>();
+            if (enemyVar == null)
+            {
+                enemyVar = other.gameObject.GetComponentInParent<EnemyPersonalControl>();
+            }
             enemyVar.Damage();
             Destroy(gameObject);
             OleadaController.sumarPuntos();
@@ -39,6 +44,10 @@ class ProjectileControl : MonoBehaviour
             panVar.Damage();
             Destroy(gameObject);
             OleadaController.sumarPuntos();
+        }
+        if (other.gameObject.tag == "Ciervo")
+        {
+            SceneManager.LoadScene("MainMenu");
         }
     }
 
