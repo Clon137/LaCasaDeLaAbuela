@@ -5,7 +5,7 @@ public class OleadaController : MonoBehaviour
 {
     public EnemyController EC;
     public GameObject EContenedor;
-    int oleadaCount = 1;
+    [SerializeField] int oleadaCount = 1;
     float oleadaTime = 120;
     public bool oleadaGoing = false;
     float restTime = 30;
@@ -50,6 +50,7 @@ public class OleadaController : MonoBehaviour
 
     void StartOleada()
     {
+        restTime = 30;
         oleadaGoing = true;
         if (oleadaCount == 2)
         {

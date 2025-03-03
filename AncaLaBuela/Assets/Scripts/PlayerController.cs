@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject ventanaCanvas1;
     [SerializeField] GameObject ventanaCanvas2;
     [SerializeField] GameObject ventanaCanvas3;
-    [SerializeField] GameObject ammoCanvas;
+    public static GameObject ammoCanvas;
 
     [SerializeField] GameObject cameraMain;
     [SerializeField] GameObject camera1;
@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float coolD = 1f;
     bool canShot = true;
 
-    [SerializeField] int ammo = 5;
+    public static int ammo = 5;
     string[] arma;
     int armaNum = 0;
 
