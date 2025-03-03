@@ -14,14 +14,17 @@ public class OleadaController : MonoBehaviour
     [SerializeField] GameObject puerta;
     public static int Puntos = 0;
     int radioCount = 10;
+    public static bool pistol = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        pistol = true;
         EContenedor = GameObject.Find("EnemyControl");
-        EC = EContenedor.GetComponent<EnemyController>();        
+        EC = EContenedor.GetComponent<EnemyController>();
+        Puntos = 0;
         Oleada.text = "Oleada " + oleadaCount;
-        puntos.text = Puntos + " puntos";        
+        puntos.text = Puntos.ToString("0000") + " puntos";
     }
 
     // Update is called once per frame
@@ -37,7 +40,14 @@ public class OleadaController : MonoBehaviour
             Oleada.text = "Oleada " + oleadaCount + " Tiempo: " + oleadaTime.ToString("0");
         }
         else if (oleadaCount >= 2)
-        {            
+        {
+            if (oleadaCount == 6)
+            {
+                radioPanel.SetActive(true);
+                radio.text = "Por cierto, si ves a un ciervo, NO le dispares";
+                if (Input.GetKeyDown(KeyCode.Return)) {Disap();}
+                Invoke("Disap", 3);
+            }
             if (oleadaCount > 6)
             {
                 Oleada.text = "Nivel Completado";
@@ -57,7 +67,7 @@ public class OleadaController : MonoBehaviour
             }
             oleadaTime = 120;
         }
-        puntos.text = Puntos + " puntos";
+        puntos.text = Puntos.ToString("0000") + " puntos";
     }
 
     void StartOleada()
@@ -72,22 +82,22 @@ public class OleadaController : MonoBehaviour
         if (oleadaCount == 3)
         {
             EC.cooldownMax = 10;
-            EC.maxRandom = 5;            
+            EC.maxRandom = 5;
         }
         if (oleadaCount == 4)
         {
             EC.cooldownMax = 8;
-            EC.maxRandom = 6;            
+            EC.maxRandom = 6;
         }
         if (oleadaCount == 5)
         {
             EC.cooldownMax = 8;
-            EC.maxRandom = 7;            
+            EC.maxRandom = 7;
         }
         if (oleadaCount == 6)
         {
             EC.cooldownMax = 8;
-            // EC.maxRandom = 8;            
+            EC.maxRandom = 8;
         }
     }
 
@@ -95,7 +105,8 @@ public class OleadaController : MonoBehaviour
     {
         oleadaGoing = false;
     }
-    public static void sumarPuntos(){
+    public static void sumarPuntos()
+    {
         Puntos += 10;
     }
 
@@ -128,25 +139,31 @@ public class OleadaController : MonoBehaviour
             radioCount++;
         }
         else if (radioCount == 4)
-        {            
+        {
             radioPanel.SetActive(false);
             radioCount++;
+            StartOleada();
         }
         else if (radioCount == 6)
-        {            
+        {
             radioPanel.SetActive(true);
             radio.text = "Oye, sal de ahi cagando leches";
             radioCount++;
         }
         else if (radioCount == 7)
-        {            
+        {
             radio.text = "Ha llegado la hora, nos largamos";
             radioCount++;
         }
         else if (radioCount == 8)
-        {            
+        {
             radioPanel.SetActive(false);
             radioCount++;
         }
+    }
+
+    void Disap()
+    {
+        radioPanel.SetActive(false);
     }
 }
