@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject ventanaCanvas1;
     [SerializeField] GameObject ventanaCanvas2;
     [SerializeField] GameObject ventanaCanvas3;
-    public static GameObject ammoCanvas;
+    [SerializeField] GameObject ammoCanvas;
 
     [SerializeField] GameObject cameraMain;
     [SerializeField] GameObject camera1;

@@ -19824,6 +19824,7 @@ MonoBehaviour:
   ventanaCanvas1: {fileID: 1030726109}
   ventanaCanvas2: {fileID: 258822820}
   ventanaCanvas3: {fileID: 1924226905}
+  ammoCanvas: {fileID: 1403752754}
   cameraMain: {fileID: 486511443}
   camera1: {fileID: 1261675132}
   camera2: {fileID: 662187870}
