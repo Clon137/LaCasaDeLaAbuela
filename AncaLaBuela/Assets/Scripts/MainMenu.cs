@@ -41,7 +41,7 @@ public class MainMenu : MonoBehaviour
     }
     public void GoToMainMenu(){
         // audioSrc.PlayOneShot(sBotones);
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("MainMenu");
     }
     
     public void Play(){

@@ -64,10 +64,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fantasmico
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6ff56a1cf96859342ac31bbd7e1cdfe5, type: 3}
+      propertyPath: m_TagString
+      value: Enemy1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6ff56a1cf96859342ac31bbd7e1cdfe5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3344394496949185055}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6ff56a1cf96859342ac31bbd7e1cdfe5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8779779013203934666}
@@ -83,6 +90,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6ff56a1cf96859342ac31bbd7e1cdfe5, type: 3}
   m_PrefabInstance: {fileID: 814735551723462216}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3344394496949185055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544914093200827161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b99e478559ee514db1ed83d04c6fc98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 2
+  Player: {fileID: 0}
 --- !u!95 &8779779013203934666
 Animator:
   serializedVersion: 7
@@ -146,7 +167,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.0253496
+  m_Radius: 1.3188508
   m_Height: 3.7280874
   m_Direction: 1
-  m_Center: {x: 0, y: 0.47372746, z: -0.015808105}
+  m_Center: {x: -0.10586047, y: 0.47372746, z: -0.015808105}

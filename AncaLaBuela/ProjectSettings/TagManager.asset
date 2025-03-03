@@ -13,6 +13,7 @@ TagManager:
   - Subir
   - Enemy2
   - EnemyPan
+  - EnemyFantasma
   layers:
   - Default
   - TransparentFX

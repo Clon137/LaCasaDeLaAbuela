@@ -9,8 +9,9 @@ public class OleadaController : MonoBehaviour
     float oleadaTime = 120;
     public bool oleadaGoing = false;
     float restTime = 30;
-    [SerializeField] TMP_Text Oleada;
+    [SerializeField] TMP_Text Oleada, puntos;
     [SerializeField] GameObject puerta;
+    public static int Puntos = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,6 +20,7 @@ public class OleadaController : MonoBehaviour
         EC = EContenedor.GetComponent<EnemyController>();
         Invoke("StartOleada", 10);
         Oleada.text = "Oleada " + oleadaCount;
+        puntos.text = Puntos + " puntos";
     }
 
     // Update is called once per frame
@@ -46,6 +48,7 @@ public class OleadaController : MonoBehaviour
             oleadaCount += 1;
             oleadaTime = 120;
         }
+        puntos.text = Puntos + " puntos";
     }
 
     void StartOleada()
@@ -69,12 +72,12 @@ public class OleadaController : MonoBehaviour
         }
         if (oleadaCount == 5)
         {
-            EC.cooldownMax = 6;
+            EC.cooldownMax = 8;
             EC.maxRandom = 7;            
         }
         if (oleadaCount == 6)
         {
-            EC.cooldownMax = 5;
+            EC.cooldownMax = 8;
             // EC.maxRandom = 8;            
         }
     }
@@ -82,5 +85,8 @@ public class OleadaController : MonoBehaviour
     void EndOleada()
     {
         oleadaGoing = false;
+    }
+    public static void sumarPuntos(){
+        Puntos += 10;
     }
 }

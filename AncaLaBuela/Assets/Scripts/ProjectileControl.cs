@@ -24,18 +24,21 @@ class ProjectileControl : MonoBehaviour
             EnemyPersonalControl enemyVar = other.gameObject.GetComponent<EnemyPersonalControl>();
             enemyVar.Damage();
             Destroy(gameObject);
+            OleadaController.sumarPuntos();
         }
         if (other.gameObject.tag == "Enemy2")
         {
             SlimeControl slimeVar = other.gameObject.GetComponent<SlimeControl>();
             slimeVar.Damage();
             Destroy(gameObject);
+            OleadaController.sumarPuntos();
         }
         if (other.gameObject.tag == "EnemyPan")
         {
             PanController panVar = other.gameObject.GetComponent<PanController>();
             panVar.Damage();
             Destroy(gameObject);
+            OleadaController.sumarPuntos();
         }
     }
 

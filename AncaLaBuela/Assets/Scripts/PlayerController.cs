@@ -81,12 +81,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject MunicionOFF3;
     [SerializeField] GameObject MunicionOFF4;
     [SerializeField] GameObject MunicionOFF5;
+    [Header("Sonidos")]
+    public AudioSource Recarga;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+
+        Recarga = GetComponent<AudioSource>();
 
         ventanaCanvas1.SetActive(false);
         ventanaCanvas2.SetActive(false);
@@ -203,6 +207,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F)){
             if (ammoCanvas){
                 ammo = 5;
+                Recarga.Play();
             }
         }
 
