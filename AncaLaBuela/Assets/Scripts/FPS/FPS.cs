@@ -1,5 +1,7 @@
 using System.IO.Compression;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class FPS : MonoBehaviour
 {
@@ -7,6 +9,7 @@ public class FPS : MonoBehaviour
     // [SerializeField] AudioClip sonido;
     [SerializeField] CharacterController Controlador;
     [SerializeField] float velocity = 15f;
+    public static int lives = 3;
 
     void Start()
     {
@@ -23,4 +26,17 @@ public class FPS : MonoBehaviour
         Controlador.Move(mover * velocity * Time.deltaTime);
         // audioSrc.PlayOneShot(sonido);
     }
+    public void Damage(){
+        lives --;
+        print("auch");
+        if (lives <= 0){
+            SceneManager.LoadScene("MainMenu");
+        }
+    }
+    void OnTriggerEnter (Collider other){
+        if (other.gameObject.tag == "Finish"){
+            SceneManager.LoadScene("Camino");
+        }
+    }
+    
 }

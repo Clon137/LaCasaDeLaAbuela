@@ -18,6 +18,8 @@ public class PauseMenu : MonoBehaviour
 
             if(isPaused){
                 ResumeGame();
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             } else{
                 PauseGame();
             }

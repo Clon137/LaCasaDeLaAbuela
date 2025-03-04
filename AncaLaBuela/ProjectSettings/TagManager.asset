@@ -17,6 +17,7 @@ TagManager:
   - ArmaCompra
   - Ciervo
   - Vida
+  - enemy
   layers:
   - Default
   - TransparentFX
