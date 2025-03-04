@@ -255,7 +255,7 @@ public class PlayerController : MonoBehaviour
                 Recarga.PlayOneShot(sndHealth);
                 if (OleadaController.Puntos >= precioVida)
                 {
-                    OleadaController.Puntos -= precioCompra;
+                    OleadaController.Puntos -= precioVida;
                     vidas++;                    
                     Vida();                    
                 }

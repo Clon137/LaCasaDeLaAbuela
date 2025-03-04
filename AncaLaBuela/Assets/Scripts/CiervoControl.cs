@@ -4,6 +4,7 @@ using UnityEngine.AI;
 public class CiervoControl : MonoBehaviour
 {
     NavMeshAgent agent;
+    [SerializeField] int rangoAtaque = 2;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -13,7 +14,7 @@ public class CiervoControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (agent.remainingDistance <= 2)
+        if (agent.remainingDistance < rangoAtaque)
         {
             Destroy(gameObject);
         }

@@ -5,8 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class FPS : MonoBehaviour
 {
-    AudioSource audioSrc;
-    [SerializeField] AudioClip sonido;
+    
     [SerializeField] CharacterController Controlador;
     [SerializeField] float velocity = 15f;
     public static int lives = 3;
@@ -24,7 +23,7 @@ public class FPS : MonoBehaviour
 
         Vector3 mover = transform.right * x + transform.forward * z;
         Controlador.Move(mover * velocity * Time.deltaTime);
-        audioSrc.PlayOneShot(sonido);
+        
     }
     public void Damage(){
         lives --;
