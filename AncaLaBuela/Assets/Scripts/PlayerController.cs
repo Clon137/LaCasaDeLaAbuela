@@ -95,7 +95,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject MunTextCont;
     [SerializeField] TMP_Text MunText;
     [Header("Sonidos")]
-    public AudioSource Recarga;
+    AudioSource Recarga;
+    [SerializeField] AudioClip sndInteract, sndReload, sndShoot, sndDamage, sndPickup, sndLight, sndradio;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -322,11 +323,15 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Ammo")
         {
             ammoCanvas.SetActive(true);
+            Recarga.PlayOneShot(sndInteract);
+
         }
         if (other.gameObject.tag == "ArmaCompra")
         {
             weaponCanvas.SetActive(true);
             weaponS = true;
+            Recarga.PlayOneShot(sndPickup);
+
         }
         if (other.gameObject.tag == "Vida")
         {
@@ -380,6 +385,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (OleadaController.pistol)
                 {
+                    Recarga.PlayOneShot(sndShoot);
+
                     // Instanciar el proyectil en el firePoint
                     GameObject projectile = Instantiate(projectilePrefab, firePoint1.position, weapon1.transform.rotation);
 
@@ -395,6 +402,8 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
+                    Recarga.PlayOneShot(sndShoot);
+
                     // Instanciar el proyectil en el firePoint
                     GameObject projectile = Instantiate(projectilePrefab, firePointf1.position, weapon1.transform.rotation);
 
@@ -413,6 +422,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (OleadaController.pistol)
                 {
+                    Recarga.PlayOneShot(sndShoot);
+
                     // Instanciar el proyectil en el firePoint
                     GameObject projectile = Instantiate(projectilePrefab, firePoint2.position, weapon2.transform.rotation);
 
@@ -428,6 +439,8 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
+                    Recarga.PlayOneShot(sndShoot);
+
                     // Instanciar el proyectil en el firePoint
                     GameObject projectile = Instantiate(projectilePrefab, firePointf2.position, weapon2.transform.rotation);
 
@@ -446,6 +459,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (OleadaController.pistol)
                 {
+                    Recarga.PlayOneShot(sndShoot);
+
                     // Instanciar el proyectil en el firePoint
                     GameObject projectile = Instantiate(projectilePrefab, firePoint3.position, weapon3.transform.rotation);
 
@@ -461,6 +476,8 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
+                    Recarga.PlayOneShot(sndShoot);
+
                     // Instanciar el proyectil en el firePoint
                     GameObject projectile = Instantiate(projectilePrefab, firePointf3.position, weapon3.transform.rotation);
 
@@ -586,6 +603,7 @@ public class PlayerController : MonoBehaviour
 
     public void Damage()
     {
+        Recarga.PlayOneShot(sndDamage);
         vidas--;
         Vida();
         if (vidas < 0)

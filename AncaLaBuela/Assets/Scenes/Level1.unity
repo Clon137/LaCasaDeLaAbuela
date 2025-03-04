@@ -20832,7 +20832,7 @@ GameObject:
   - component: {fileID: 1638263686}
   - component: {fileID: 1638263684}
   - component: {fileID: 1638263683}
-  - component: {fileID: 1638263682}
+  - component: {fileID: 1638263688}
   - component: {fileID: 1638263681}
   - component: {fileID: 1638263687}
   m_Layer: 0
@@ -20869,78 +20869,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1638263682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1638263680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf474f81593914643ae1ae1b93d163a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  player: {fileID: 1922753655}
-  moveSpeed: 7
-  cam: {fileID: 486511446}
-  groundDrag: 4
-  airMultiplier: 0.4
-  playerHeight: 2
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
-  orientation: {fileID: 1415668044}
-  ventanaCanvas1: {fileID: 1030726109}
-  ventanaCanvas2: {fileID: 258822820}
-  ventanaCanvas3: {fileID: 1924226905}
-  ammoCanvas: {fileID: 1403752754}
-  weaponCont: {fileID: 579512549}
-  precioCompra: 400
-  weaponCanvas: {fileID: 714154679}
-  vidaCanvas: {fileID: 1064964961}
-  precioVida: 50
-  cameraMain: {fileID: 486511443}
-  camera1: {fileID: 1261675132}
-  camera2: {fileID: 662187870}
-  camera3: {fileID: 1125809707}
-  mira: {fileID: 407082708}
-  weapon1: {fileID: 176179330}
-  weapon2: {fileID: 568549397}
-  weapon3: {fileID: 960716980}
-  projectilePrefab: {fileID: 8545040280933953507, guid: 3de4be5a5fa0eb24697bf796347dd8f3, type: 3}
-  projectileSpeed: 20
-  firePoint1: {fileID: 5375440542577762631}
-  firePoint2: {fileID: 867333223}
-  firePoint3: {fileID: 1742275636}
-  firePointf1: {fileID: 2056019836}
-  firePointf2: {fileID: 1195644189}
-  firePointf3: {fileID: 433477511}
-  coolD: 1
-  vidaON1: {fileID: 974653891}
-  vidaON2: {fileID: 2037380851}
-  vidaON3: {fileID: 1269437703}
-  vidaON4: {fileID: 1344902341}
-  vidaON5: {fileID: 2010549337}
-  vidaOFF1: {fileID: 880549952}
-  vidaOFF2: {fileID: 456422618}
-  vidaOFF3: {fileID: 260067731}
-  vidaOFF4: {fileID: 1542164553}
-  vidaOFF5: {fileID: 23449676}
-  MunicionON1: {fileID: 1293937932}
-  MunicionON2: {fileID: 713434052}
-  MunicionON3: {fileID: 1864961576}
-  MunicionON4: {fileID: 2104030061}
-  MunicionON5: {fileID: 2098421165}
-  MunicionOFF1: {fileID: 937719108}
-  MunicionOFF2: {fileID: 2127878634}
-  MunicionOFF3: {fileID: 754667207}
-  MunicionOFF4: {fileID: 97456400}
-  MunicionOFF5: {fileID: 741124782}
-  MunTextCont: {fileID: 1069907117}
-  MunText: {fileID: 1069907119}
-  Recarga: {fileID: 0}
 --- !u!136 &1638263683
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -21123,6 +21051,84 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1638263688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638263680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf474f81593914643ae1ae1b93d163a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  player: {fileID: 1922753655}
+  moveSpeed: 7
+  cam: {fileID: 486511446}
+  groundDrag: 4
+  airMultiplier: 0.4
+  playerHeight: 2
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  orientation: {fileID: 1415668044}
+  ventanaCanvas1: {fileID: 1030726109}
+  ventanaCanvas2: {fileID: 258822820}
+  ventanaCanvas3: {fileID: 1924226905}
+  ammoCanvas: {fileID: 1403752754}
+  weaponCont: {fileID: 579512549}
+  precioCompra: 400
+  weaponCanvas: {fileID: 714154679}
+  vidaCanvas: {fileID: 1064964961}
+  precioVida: 50
+  cameraMain: {fileID: 486511443}
+  camera1: {fileID: 1261675132}
+  camera2: {fileID: 662187870}
+  camera3: {fileID: 1125809707}
+  mira: {fileID: 407082708}
+  weapon1: {fileID: 176179330}
+  weapon2: {fileID: 568549397}
+  weapon3: {fileID: 960716980}
+  projectilePrefab: {fileID: 8545040280933953507, guid: 3de4be5a5fa0eb24697bf796347dd8f3, type: 3}
+  projectileSpeed: 20
+  firePoint1: {fileID: 5375440542577762631}
+  firePoint2: {fileID: 867333223}
+  firePoint3: {fileID: 1742275636}
+  firePointf1: {fileID: 2056019836}
+  firePointf2: {fileID: 1195644189}
+  firePointf3: {fileID: 433477511}
+  coolD: 1
+  vidaON1: {fileID: 974653891}
+  vidaON2: {fileID: 2037380851}
+  vidaON3: {fileID: 1269437703}
+  vidaON4: {fileID: 1344902341}
+  vidaON5: {fileID: 2010549337}
+  vidaOFF1: {fileID: 880549952}
+  vidaOFF2: {fileID: 456422618}
+  vidaOFF3: {fileID: 260067731}
+  vidaOFF4: {fileID: 1542164553}
+  vidaOFF5: {fileID: 23449676}
+  MunicionON1: {fileID: 1293937932}
+  MunicionON2: {fileID: 713434052}
+  MunicionON3: {fileID: 1864961576}
+  MunicionON4: {fileID: 2104030061}
+  MunicionON5: {fileID: 2098421165}
+  MunicionOFF1: {fileID: 937719108}
+  MunicionOFF2: {fileID: 2127878634}
+  MunicionOFF3: {fileID: 754667207}
+  MunicionOFF4: {fileID: 97456400}
+  MunicionOFF5: {fileID: 741124782}
+  MunTextCont: {fileID: 1069907117}
+  MunText: {fileID: 1069907119}
+  sndInteract: {fileID: 8300000, guid: e28b1ebdd0a94d245a6c71990d1926f0, type: 3}
+  sndReload: {fileID: 8300000, guid: c51c23d317bf24c46ac3f9ea880b6ad6, type: 3}
+  sndShoot: {fileID: 8300000, guid: 0cc76efe07e08914c8ed94c0632d9fee, type: 3}
+  sndDamage: {fileID: 0}
+  sndPickup: {fileID: 0}
+  sndLight: {fileID: 0}
+  sndradio: {fileID: 0}
 --- !u!1001 &1639375516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21707,6 +21713,78 @@ RectTransform:
   m_AnchoredPosition: {x: 326, y: 183.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1712347997
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1712347998}
+  - component: {fileID: 1712348000}
+  - component: {fileID: 1712347999}
+  m_Layer: 5
+  m_Name: RawImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1712347998
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712347997}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.27292433, y: 1.9718509, z: 0.27292433}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2058021136}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 278, y: 0.000039005}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1712347999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712347997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 2800000, guid: cbf170a949ca52a4f8bb51d3ce10df1f, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &1712348000
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712347997}
+  m_CullTransparentMesh: 1
 --- !u!1 &1721067891
 GameObject:
   m_ObjectHideFlags: 0
@@ -25566,6 +25644,7 @@ RectTransform:
   m_Children:
   - {fileID: 1880548819}
   - {fileID: 383182685}
+  - {fileID: 1712347998}
   m_Father: {fileID: 58245719}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
