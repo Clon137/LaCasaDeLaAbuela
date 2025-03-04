@@ -6,7 +6,7 @@ public class OleadaController : MonoBehaviour
     public EnemyController EC;
     public GameObject EContenedor;
     [SerializeField] int oleadaCount = 1;
-    float oleadaTime = 120;
+    float oleadaTime = 60;
     public bool oleadaGoing = false;
     float restTime = 30;
     [SerializeField] TMP_Text Oleada, puntos, radio;
@@ -65,7 +65,7 @@ public class OleadaController : MonoBehaviour
             {
                 radioCount = 6;
             }
-            oleadaTime = 120;
+            oleadaTime = 60;
         }
         puntos.text = Puntos.ToString("0000") + " puntos";
     }

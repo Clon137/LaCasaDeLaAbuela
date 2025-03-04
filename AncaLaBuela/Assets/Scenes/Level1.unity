@@ -21122,13 +21122,14 @@ MonoBehaviour:
   MunicionOFF5: {fileID: 741124782}
   MunTextCont: {fileID: 1069907117}
   MunText: {fileID: 1069907119}
-  sndInteract: {fileID: 8300000, guid: e28b1ebdd0a94d245a6c71990d1926f0, type: 3}
+  sndInteract: {fileID: 0}
   sndReload: {fileID: 8300000, guid: c51c23d317bf24c46ac3f9ea880b6ad6, type: 3}
-  sndShoot: {fileID: 8300000, guid: 0cc76efe07e08914c8ed94c0632d9fee, type: 3}
-  sndDamage: {fileID: 0}
-  sndPickup: {fileID: 0}
-  sndLight: {fileID: 0}
+  sndShoot: {fileID: 8300000, guid: bf5cac2e8fb13c445b199881eedc04b4, type: 3}
+  sndDamage: {fileID: 8300000, guid: 1209e9d8b37c76140959678d67f2cff8, type: 3}
+  sndPickup: {fileID: 8300000, guid: d965c4a401472e549ba13efd7d332bc8, type: 3}
+  sndLight: {fileID: 8300000, guid: 49d146d61c9b13f41b7a329993fa312e, type: 3}
   sndradio: {fileID: 0}
+  sndHealth: {fileID: 8300000, guid: e83a65b3231d2d74782d558ce53c05ed, type: 3}
 --- !u!1001 &1639375516
 PrefabInstance:
   m_ObjectHideFlags: 0

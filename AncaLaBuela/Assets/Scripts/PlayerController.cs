@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] TMP_Text MunText;
     [Header("Sonidos")]
     AudioSource Recarga;
-    [SerializeField] AudioClip sndInteract, sndReload, sndShoot, sndDamage, sndPickup, sndLight, sndradio;
+    [SerializeField] AudioClip sndInteract, sndReload, sndShoot, sndDamage, sndPickup, sndLight, sndradio, sndHealth;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -226,6 +226,7 @@ public class PlayerController : MonoBehaviour
         {
             if (ammoCanvas)
             {
+                Recarga.PlayOneShot(sndInteract);
                 if (OleadaController.pistol)
                 {
                     ammo = 5;
@@ -251,6 +252,7 @@ public class PlayerController : MonoBehaviour
             }
             if (vidaT)
             {
+                Recarga.PlayOneShot(sndHealth);
                 if (OleadaController.Puntos >= precioVida)
                 {
                     OleadaController.Puntos -= precioCompra;
@@ -323,8 +325,6 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Ammo")
         {
             ammoCanvas.SetActive(true);
-            Recarga.PlayOneShot(sndInteract);
-
         }
         if (other.gameObject.tag == "ArmaCompra")
         {

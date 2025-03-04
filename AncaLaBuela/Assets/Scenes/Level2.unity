@@ -20147,6 +20147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712b72cff0e71dc4685c8d5f0a1ba5c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sonido: {fileID: 8300000, guid: 4e74509e685542542924ea2c30e0c053, type: 3}
   Controlador: {fileID: 1062279406}
   velocity: 15
 --- !u!136 &1062279408
